@@ -38,6 +38,26 @@ IntCodeCPUTest >> testAtPut [
 	self assert: result equals: 10.
 ]
 
+{ #category : #tests }
+IntCodeCPUTest >> testIntegration1 [
+  | cpu program |
+cpu := IntCodeCPU new.
+  program := #(2 4 4 5 99 0).
+  cpu load: program.
+  cpu start.
+  self assert: (cpu at: 5) equals: 9801.
+]
+
+{ #category : #tests }
+IntCodeCPUTest >> testIntegration2 [
+  | cpu program |
+cpu := IntCodeCPU new.
+  program := #(1 1 1 4 99 5 6 0 99).
+  cpu load: program.
+  cpu start.
+  self assert: (cpu at: 0) equals: 30.
+]
+
 { #category : #test }
 IntCodeCPUTest >> testMulti [
   | cpu program |
