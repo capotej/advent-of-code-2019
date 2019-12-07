@@ -4,12 +4,12 @@ Class {
 	#category : #Advent2019
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #solution }
 Day1 >> fuelRequired: mass [
 	^(mass // 3) - 2
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #solution }
 Day1 >> solution [
 
 | reqs sum |
@@ -23,7 +23,7 @@ reqs do: [ :n | sum := sum+n ].
 ^sum.
 ]
 
-{ #category : #accessing }
+{ #category : #solution }
 Day1 >> totalFuelRequired: mass [
 	| masses required sum |
 	masses := OrderedCollection new.
