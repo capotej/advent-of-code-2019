@@ -8,6 +8,16 @@ Class {
 }
 
 { #category : #test }
+IntCodeCPUTest >> testAdd [
+  | cpu program |
+  cpu := IntCodeCPU new.
+  program := #(1 0 0 0 99).
+  cpu load: program.
+  cpu start.
+  self assert: (cpu at: 0) equals: 2.
+]
+
+{ #category : #test }
 IntCodeCPUTest >> testAt [
 	| cpu program result |
 	program := #(10 20 30 40).
@@ -26,4 +36,14 @@ IntCodeCPUTest >> testAtPut [
 	cpu at: 3 put: 10.
 	result := cpu at: 3.
 	self assert: result equals: 10.
+]
+
+{ #category : #test }
+IntCodeCPUTest >> testMulti [
+  | cpu program |
+cpu := IntCodeCPU new.
+  program := #(2 3 0 3 99).
+  cpu load: program.
+  cpu start.
+  self assert: (cpu at: 3) equals: 6.
 ]

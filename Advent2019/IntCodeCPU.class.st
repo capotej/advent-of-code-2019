@@ -9,25 +9,31 @@ Class {
 	#category : #Advent2019
 }
 
-{ #category : #adding }
+{ #category : #instructions }
 IntCodeCPU >> add [ 
-	| x y xValue yValue z sum zValue |
+	| xValue yValue sum zValue xAddress yAddress |
 
-	xValue := self at: programCounter + 1.
-	yValue := self at: programCounter + 2.
-	zValue := self at: programCounter + 3.
-	self advance.
-	z := self read.
-	zValue := self at: z.
+	xAddress := self at: programCounter + 1.
+	yAddress := self at: programCounter + 2.
+	zValue   := self at: programCounter + 3.
+	
+	xValue := self at: xAddress.
+	yValue := self at: yAddress.
 	
 	sum := xValue + yValue.
 	self at: zValue put: sum.
+	self advance: 4.
 
 ]
 
 { #category : #execution }
 IntCodeCPU >> advance [
-	programCounter := programCounter + 1
+	programCounter := programCounter + 1.
+]
+
+{ #category : #execution }
+IntCodeCPU >> advance: val [
+	programCounter := programCounter + val.
 ]
 
 { #category : #accessing }
@@ -35,7 +41,7 @@ IntCodeCPU >> at: pos [
   ^program at: pos + 1.
 ]
 
-{ #category : #accessing }
+{ #category : #writing }
 IntCodeCPU >> at: pos put: value [
   ^program at: pos + 1 put: value; yourself.
 ]
@@ -54,7 +60,7 @@ IntCodeCPU >> execute [
 		ifTrue: [  self stop ].
 ]
 
-{ #category : #actions }
+{ #category : #writing }
 IntCodeCPU >> load: intProgram [
 program := intProgram.
 "use programCounter := (programCounter + 1) % progam size"
@@ -62,31 +68,30 @@ keepGoing := true.
 programCounter := 0.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #instructions }
 IntCodeCPU >> multi [
-	| xValue yValue sum zValue |
+	| xValue yValue sum zValue xAddress yAddress |
 
-	xValue := self at: programCounter + 1.
-	yValue := self at: programCounter + 2.
-	zValue := self at: programCounter + 3.
+	xAddress := self at: programCounter + 1.
+	yAddress := self at: programCounter + 2.
+	zValue   := self at: programCounter + 3.
 	
-	sum := xValue + yValue.
+	xValue := self at: xAddress.
+	yValue := self at: yAddress.
+	
+	sum := xValue * yValue.
 	self at: zValue put: sum.
+	self advance: 4.
 
 ]
 
-{ #category : #actions }
-IntCodeCPU >> read [
-^program at: programCounter.
-]
-
-{ #category : #accessing }
+{ #category : #execution }
 IntCodeCPU >> start [
-	[programCounter  < program size | keepGoing ] whileTrue: 
+	[ keepGoing ] whileTrue: 
 		[ self execute ].
 ]
 
-{ #category : #accessing }
+{ #category : #instructions }
 IntCodeCPU >> stop [ 
 	keepGoing := false.
 ]
