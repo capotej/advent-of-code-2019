@@ -7,7 +7,7 @@ Class {
 	#category : #Advent2019
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #actions }
 Computer >> compute: x and: y [
 	| cpu output |
 	cpu := IntCodeCPU new.
