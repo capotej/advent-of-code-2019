@@ -21,6 +21,7 @@ cpu start.
 
 { #category : #solution }
 Day2 >> solutionPartTwo [
+"run this in a playground because for some reason this causes an infinite loop when run as a method"
 | comp program |
 comp := Computer new.
 
@@ -28,6 +29,8 @@ program := #(1 0 0 3 1 1 2 3 1 3 4 3 1 5 0 3 2 9 1 19 1 19 5 23 1 23 5 27 2 27 1
 
 comp load: program.
 
-^comp compute: 70 and: 14.
-  
+comp compute: 70 and: 14.
+
+^100 * 70 + 14.
+
 ]
