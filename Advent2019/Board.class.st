@@ -45,7 +45,7 @@ Board >> manhattanDistance: stringCoord [
 { #category : #actions }
 Board >> mark: x and: y for: name [
 	| coord val collection |
-	coord := '{1},{2}' format: { x. y }.
+	coord := x asString,',',y asString.
 	collection := Set new.
 	
 	val := grid at: coord ifAbsentPut: collection.
